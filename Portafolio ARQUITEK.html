@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARQUITEK | Arq. Ma. del Rayo Munguía Pérez — DRO Nivel A & Despacho de Arquitectura</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cormorant Garamond (Editorial Elegante) y Plus Jakarta Sans (Estructura Técnica) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        stone: {
+                            50: '#FAF8F5',
+                            100: '#F4F0E8',
+                            200: '#E6DFC5',
+                            300: '#D4C9B0',
+                            700: '#4A463D',
+                            800: '#2C2A24',
+                            900: '#1A1917',
+                        },
+                        bronze: {
+                            400: '#C59A6F',
+                            500: '#B27A4E',
+                            600: '#8C5A32',
+                            700: '#6B4221',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #FAF8F5;
+            color: #1A1917;
+            overflow-x: hidden;
+        }
+        
+        /* Grid de plano arquitectónico abstracto de fondo */
+        .arch-grid-pattern {
+            background-size: 36px 36px;
+            background-image: 
+                linear-gradient(to right, rgba(26, 25, 23, 0.035) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(26, 25, 23, 0.035) 1px, transparent 1px);
+        }
+
+        .service-card {
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .service-card:hover {
+            transform: translateY(-4px);
+            border-color: #B27A4E;
+        }
+
+        /* Ocultar scrollbar secundaria */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-bronze-500 selection:text-white arch-grid-pattern">
+
+    <!-- NAVEGACIÓN PRINCIPAL -->
+    <header id="navbar" class="fixed top-0 left-0 right-0 z-40 transition-all duration-300 bg-stone-50/90 backdrop-blur-md border-b border-stone-200/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                
+                <!-- Logo Monograma Técnico (Sin Fotos) -->
+                <a href="#inicio" class="flex items-center gap-3 group">
+                    <div class="w-11 h-11 bg-stone-900 text-stone-50 flex flex-col items-center justify-center rounded-lg border border-bronze-500/30 group-hover:bg-bronze-600 transition-colors">
+                        <span class="font-serif text-lg font-bold tracking-widest leading-none">A</span>
+                        <span class="text-[8px] font-mono tracking-tighter text-bronze-400 group-hover:text-white">DRO-A</span>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-serif text-2xl tracking-[0.18em] font-semibold text-stone-900 leading-none">ARQUITEK</span>
+                        <span class="text-[10px] tracking-[0.15em] uppercase text-stone-600 font-medium mt-1">Arq. Ma. del Rayo Munguía P.</span>
+                    </div>
+                </a>
+
+                <!-- Enlaces Desktop -->
+                <nav class="hidden md:flex items-center space-x-7 text-xs font-semibold uppercase tracking-wider text-stone-700">
+                    <a href="#inicio" class="hover:text-bronze-600 transition-colors py-2">Inicio</a>
+                    <a href="#semblanza" class="hover:text-bronze-600 transition-colors py-2">Semblanza & DRO</a>
+                    <a href="#servicios" class="hover:text-bronze-600 transition-colors py-2">Servicios</a>
+                    <a href="#archivo-privado" class="hover:text-bronze-600 transition-colors py-2">Tipologías (NDA)</a>
+                    <a href="#contacto" class="px-5 py-2.5 bg-stone-900 text-stone-50 rounded-lg hover:bg-bronze-600 transition-colors flex items-center gap-2 text-xs uppercase tracking-wider">
+                        <i data-lucide="message-square-quote" class="w-4 h-4 text-bronze-400"></i>
+                        <span>Cotizar por WhatsApp</span>
+                    </a>
+                </nav>
+
+                <!-- Menú Móvil Botón -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-stone-800 hover:bg-stone-200/70" aria-label="Abrir menú">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Menú Desplegable Móvil -->
+        <div id="mobile-menu" class="hidden md:hidden bg-stone-50 border-b border-stone-200 px-6 pt-4 pb-6 space-y-3 shadow-xl">
+            <a href="#inicio" class="mobile-link block py-2.5 text-sm font-semibold uppercase tracking-wider text-stone-800 border-b border-stone-200/60">Inicio</a>
+            <a href="#semblanza" class="mobile-link block py-2.5 text-sm font-semibold uppercase tracking-wider text-stone-800 border-b border-stone-200/60">Semblanza & Registros DRO</a>
+            <a href="#servicios" class="mobile-link block py-2.5 text-sm font-semibold uppercase tracking-wider text-stone-800 border-b border-stone-200/60">Servicios Profesionales</a>
+            <a href="#archivo-privado" class="mobile-link block py-2.5 text-sm font-semibold uppercase tracking-wider text-stone-800 border-b border-stone-200/60">Tipologías & Dossier Privado</a>
+            <div class="pt-2">
+                <a href="#contacto" class="mobile-link w-full py-3 bg-bronze-600 text-white rounded-lg font-semibold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md">
+                    <i data-lucide="message-circle" class="w-4 h-4"></i>
+                    <span>Contactar Directo por WhatsApp</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 1. HERO SECTION -->
+    <section id="inicio" class="relative pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Columna Texto Hero -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-stone-200/80 border border-stone-300/80 text-stone-800 text-xs font-semibold uppercase tracking-widest">
+                        <span class="w-2 h-2 rounded-full bg-bronze-500 animate-pulse"></span>
+                        Directora Responsable de Obra (DRO Nivel A)
+                    </div>
+
+                    <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-normal text-stone-900 leading-[1.12] tracking-tight">
+                        “Arquitectura es el arte de crear espacios de <span class="italic text-bronze-600 font-normal">elegancia y confort</span>, agradable y gentil al contexto.”
+                    </h1>
+
+                    <div class="p-4 rounded-xl bg-stone-100 border-l-4 border-bronze-500 text-xs sm:text-sm text-stone-700 space-y-1">
+                        <p class="font-semibold text-stone-900">Titular del Despacho: Arq. Ma. del Rayo Munguía Pérez</p>
+                        <p class="text-stone-600 font-light">Licenciada en Arquitectura (UDO) • Mtra. en Urbanismo (IEU) • Mtra. en Dirección de Proyectos de Innovación (UTEL)</p>
+                    </div>
+
+                    <p class="text-stone-600 text-sm sm:text-base leading-relaxed font-light">
+                        Estudio integral de diseño, supervisión técnica, obra civil y gestión normativa con <strong>23 años de experiencia</strong>. Certificados periciales sin límite de metros cuadrados en Puebla, San Pedro Cholula, San Andrés Cholula, Cuautlancingo, Coronango y Tlaxcala.
+                    </p>
+
+                    <div class="pt-3 flex flex-col sm:flex-row gap-4">
+                        <a href="#contacto" class="px-7 py-4 bg-stone-900 text-stone-50 rounded-xl font-semibold text-xs uppercase tracking-wider hover:bg-bronze-600 transition-all flex items-center justify-center gap-3 shadow-lg shadow-stone-900/10">
+                            <span>Cotizar Proyecto por WhatsApp</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4 text-bronze-400"></i>
+                        </a>
+                        <a href="#servicios" class="px-7 py-4 bg-white border border-stone-300 text-stone-900 rounded-xl font-semibold text-xs uppercase tracking-wider hover:border-bronze-500 hover:text-bronze-600 transition-all flex items-center justify-center gap-2">
+                            <i data-lucide="layers" class="w-4 h-4 text-stone-500"></i>
+                            <span>Explorar 7 Servicios</span>
+                        </a>
+                    </div>
+
+                    <!-- Métricas Principales de Experiencia -->
+                    <div class="pt-8 grid grid-cols-2 sm:grid-cols-4 gap-4 border-t border-stone-200/90">
+                        <div class="p-3 rounded-lg bg-stone-100/60 border border-stone-200/60">
+                            <p class="font-serif text-3xl font-semibold text-stone-900">23</p>
+                            <p class="text-[10px] uppercase tracking-wider font-semibold text-stone-600 mt-0.5">Años de Trayectoria</p>
+                        </div>
+                        <div class="p-3 rounded-lg bg-stone-100/60 border border-stone-200/60">
+                            <p class="font-serif text-3xl font-semibold text-stone-900">+20</p>
+                            <p class="text-[10px] uppercase tracking-wider font-semibold text-stone-600 mt-0.5">Proyectos Ejecutados</p>
+                        </div>
+                        <div class="p-3 rounded-lg bg-stone-100/60 border border-stone-200/60">
+                            <p class="font-serif text-3xl font-semibold text-stone-900">Nivel A</p>
+                            <p class="text-[10px] uppercase tracking-wider font-semibold text-stone-600 mt-0.5">Sin límite de m²</p>
+                        </div>
+                        <div class="p-3 rounded-lg bg-stone-100/60 border border-stone-200/60">
+                            <p class="font-serif text-3xl font-semibold text-stone-900">6</p>
+                            <p class="text-[10px] uppercase tracking-wider font-semibold text-stone-600 mt-0.5">Municipios DRO "A"</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gráfico Arquitectónico Vectorial Abstracto (Sin fotos personales ni de proyectos) -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative bg-stone-900 text-stone-100 rounded-2xl p-8 shadow-2xl border border-stone-800 overflow-hidden min-h-[460px] flex flex-col justify-between">
+                        
+                        <!-- Fondo Vectorial de Isometría / Plano Técnico -->
+                        <div class="absolute inset-0 opacity-15 pointer-events-none">
+                            <svg class="w-full h-full" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M50 100 L350 100 L350 400 L50 400 Z" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 4"/>
+                                <path d="M50 100 L200 30 L350 100" stroke="currentColor" stroke-width="1.5"/>
+                                <circle cx="200" cy="250" r="120" stroke="currentColor" stroke-width="1"/>
+                                <path d="M100 250 L300 250 M200 150 L200 350" stroke="currentColor" stroke-width="1"/>
+                                <path d="M80 320 L200 420 L320 320" stroke="currentColor" stroke-width="1"/>
+                            </svg>
+                        </div>
+
+                        <!-- Badge Superior DRO -->
+                        <div class="relative z-10 flex justify-between items-start">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-bronze-500/20 border border-bronze-400/30 text-bronze-300 text-[11px] uppercase font-mono tracking-widest">
+                                <i data-lucide="shield-check" class="w-3.5 h-3.5 text-bronze-400"></i>
+                                REGISTRO OFICIAL DRO A
+                            </div>
+                            <span class="text-xs font-mono text-stone-500">PUE-DRO-2026</span>
+                        </div>
+
+                        <!-- Composición Tipográfica Abstracta -->
+                        <div class="relative z-10 my-8 space-y-4">
+                            <div class="w-16 h-1 bg-bronze-500 rounded-full"></div>
+                            <h3 class="font-serif text-3xl font-normal text-stone-50 leading-snug">
+                                Rigor Estructural, Innovación Urbana & Gestión Legal.
+                            </h3>
+                            <p class="text-xs text-stone-400 leading-relaxed font-light">
+                                Soluciones integrales de diseño residencial, comercial e industrial garantizadas con firma pericial de Director Responsable de Obra.
+                            </p>
+                        </div>
+
+                        <!-- Tarjeta Inferior de Cobertura -->
+                        <div class="relative z-10 p-4 rounded-xl bg-stone-800/90 border border-stone-700/80 backdrop-blur-md">
+                            <div class="flex items-center gap-3">
+                                <div class="w-9 h-9 rounded-lg bg-bronze-500/20 text-bronze-400 flex items-center justify-center shrink-0">
+                                    <i data-lucide="map-pin" class="w-5 h-5"></i>
+                                </div>
+                                <div class="text-xs">
+                                    <p class="font-semibold text-stone-200">Zona de Cobertura Operativa:</p>
+                                    <p class="text-stone-400 text-[11px]">Puebla, EdoMex, Área Metropolitana y Región Cholula.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. SECCIÓN SEMBLANZA PROFESIONAL & REGISTROS DRO -->
+    <section id="semblanza" class="py-20 md:py-28 bg-stone-100/90 border-y border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="max-w-3xl mb-14">
+                <span class="text-xs font-semibold uppercase tracking-[0.25em] text-bronze-600 block mb-2">01 / Perfil Institucional</span>
+                <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl text-stone-900 font-normal">
+                    Semblanza Profesional & Capacidad Técnica DRO
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+                
+                <!-- Columna Monograma Institucional (Reemplazo de Foto Personal por Privacidad) -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="p-8 rounded-2xl bg-stone-900 text-stone-50 shadow-xl border border-stone-800 flex flex-col items-center text-center relative overflow-hidden">
+                        <div class="w-24 h-24 rounded-2xl bg-bronze-500/15 border border-bronze-500/40 flex items-center justify-center mb-6">
+                            <span class="font-serif text-4xl font-bold text-bronze-400">ARQ</span>
+                        </div>
+                        
+                        <h3 class="font-serif text-2xl font-semibold text-stone-100">Arq. Ma. del Rayo Munguía Pérez</h3>
+                        <p class="text-xs uppercase tracking-widest text-bronze-400 font-mono mt-1">Directora General de ARQUITEK</p>
+                        
+                        <div class="w-full border-t border-stone-800 my-6"></div>
+
+                        <div class="text-left w-full space-y-3 text-xs">
+                            <div class="flex items-start gap-2 text-stone-300">
+                                <i data-lucide="award" class="w-4 h-4 text-bronze-400 shrink-0 mt-0.5"></i>
+                                <span><strong>Lic. en Arquitectura</strong> — Universidad de Oriente (UDO).</span>
+                            </div>
+                            <div class="flex items-start gap-2 text-stone-300">
+                                <i data-lucide="graduation-cap" class="w-4 h-4 text-bronze-400 shrink-0 mt-0.5"></i>
+                                <span><strong>Mtra. en Urbanismo</strong> — Instituto de Estudios Universitarios (IEU).</span>
+                            </div>
+                            <div class="flex items-start gap-2 text-stone-300">
+                                <i data-lucide="graduation-cap" class="w-4 h-4 text-bronze-400 shrink-0 mt-0.5"></i>
+                                <span><strong>Mtra. en Dirección de Proyectos de Innovación</strong> — Universidad Tecnológica Latinoamericana (UTEL).</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Garantía Técnica Nivel A -->
+                    <div class="bg-stone-50 p-6 rounded-2xl border border-stone-200 space-y-3">
+                        <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-stone-900">
+                            <i data-lucide="file-check-2" class="w-4 h-4 text-bronze-600"></i>
+                            <span>Alcance Pericial DRO Nivel "A"</span>
+                        </div>
+                        <p class="text-xs text-stone-600 leading-relaxed">
+                            La acreditación Nivel "A" faculta legalmente al despacho para dirigir, supervisar y respaldar obras de <strong>cualquier magnitud, altura o superficie en m²</strong>, garantizando cumplimiento estructural y normativo.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Columna Texto Semblanza y Jurisdicciones DRO -->
+                <div class="lg:col-span-7 space-y-8">
+                    
+                    <div class="bg-white p-7 rounded-2xl border border-stone-200 shadow-sm space-y-4">
+                        <h3 class="font-serif text-2xl font-medium text-stone-900">Trayectoria & Metodología</h3>
+                        <p class="text-stone-700 text-sm leading-relaxed font-light">
+                            Con <strong>23 años de trayectoria profesional ininterrumpida</strong>, la <strong>Arq. Ma. del Rayo Munguía Pérez</strong> ha consolidado a <strong>ARQUITEK</strong> como una firma de arquitectura y gestoría técnica de referencia en la región central de México.
+                        </p>
+                        <p class="text-stone-700 text-sm leading-relaxed font-light">
+                            Su doble maestría en <em>Urbanismo</em> y en <em>Dirección de Proyectos de Innovación</em> otorga a cada desarrollo una visión tridimensional: estética arquitectónica sensible, viabilidad urbana sostenible y eficiencia en costos y tiempos de ejecución.
+                        </p>
+                    </div>
+
+                    <!-- Municipios con Registro DRO A -->
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <h4 class="font-serif text-2xl font-medium text-stone-900">Demarcaciones con Certificación DRO Nivel "A"</h4>
+                            <span class="text-[11px] font-mono text-bronze-600 font-semibold uppercase tracking-wider">6 Municipios Acreditados</span>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                            <div class="p-4 rounded-xl bg-white border border-stone-200 flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-md bg-stone-100 text-stone-800 flex items-center justify-center font-bold text-xs">PUE</div>
+                                <div>
+                                    <p class="text-xs font-semibold text-stone-900">Municipio de Puebla</p>
+                                    <p class="text-[11px] text-stone-500">Registro Directora Responsable Nivel A</p>
+                                </div>
+                            </div>
+
+                            <div class="p-4 rounded-xl bg-white border border-stone-200 flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-md bg-stone-100 text-stone-800 flex items-center justify-center font-bold text-xs">SCH</div>
+                                <div>
+                                    <p class="text-xs font-semibold text-stone-900">San Pedro Cholula</p>
+                                    <p class="text-[11px] text-stone-500">Licencias & Supervisión de Obra</p>
+                                </div>
+                            </div>
+
+                            <div class="p-4 rounded-xl bg-white border border-stone-200 flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-md bg-stone-100 text-stone-800 flex items-center justify-center font-bold text-xs">ACH</div>
+                                <div>
+                                    <p class="text-xs font-semibold text-stone-900">San Andrés Cholula</p>
+                                    <p class="text-[11px] text-stone-500">Desarrollos Residenciales & Comerciales</p>
+                                </div>
+                            </div>
+
+                            <div class="p-4 rounded-xl bg-white border border-stone-200 flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-md bg-stone-100 text-stone-800 flex items-center justify-center font-bold text-xs">CUA</div>
+                                <div>
+                                    <p class="text-xs font-semibold text-stone-900">Cuautlancingo</p>
+                                    <p class="text-[11px] text-stone-500">Dictámenes Técnicos y Permisos</p>
+                                </div>
+                            </div>
+
+                            <div class="p-4 rounded-xl bg-white border border-stone-200 flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-md bg-stone-100 text-stone-800 flex items-center justify-center font-bold text-xs">COR</div>
+                                <div>
+                                    <p class="text-xs font-semibold text-stone-900">Coronango</p>
+                                    <p class="text-[11px] text-stone-500">Gestoría de Construcción e Industria</p>
+                                </div>
+                            </div>
+
+                            <div class="p-4 rounded-xl bg-white border border-stone-200 flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-md bg-stone-100 text-stone-800 flex items-center justify-center font-bold text-xs">TLX</div>
+                                <div>
+                                    <p class="text-xs font-semibold text-stone-900">Estado de Tlaxcala</p>
+                                    <p class="text-[11px] text-stone-500">Firma DRO Estatal Autorizada</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cobertura Geográfica Extendida -->
+                    <div class="p-5 rounded-xl bg-stone-900 text-stone-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                        <div>
+                            <p class="text-xs font-semibold uppercase tracking-wider text-bronze-400">Cobertura de Proyectos</p>
+                            <p class="text-sm font-medium text-stone-200">Puebla, Estado de México y Área Metropolitana</p>
+                        </div>
+                        <a href="https://wa.me/522212630195?text=Hola%20Arq.%20Ma.%20del%20Rayo,%20quisiera%20consultar%20la%20factibilidad%20de%20un%20proyecto%20en%20mi%20municipio." target="_blank" class="px-4 py-2 bg-bronze-600 hover:bg-bronze-500 text-white rounded-lg text-xs font-semibold uppercase tracking-wider transition-colors shrink-0">
+                            Consultar Cobertura
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. LOS 7 SERVICIOS REALES DEL DESPACHO ARQUITEK -->
+    <section id="servicios" class="py-20 md:py-28">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="max-w-3xl mb-16">
+                <span class="text-xs font-semibold uppercase tracking-[0.25em] text-bronze-600 block mb-2">02 / Catálogo de Servicios</span>
+                <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl text-stone-900 font-normal">
+                    Servicios Especializados de Arquitectura & Construcción
+                </h2>
+                <p class="text-stone-600 text-sm mt-3 font-light">
+                    Soluciones llave en mano desde el primer boceto arquitectónico hasta el permiso de ocupación final.
+                </p>
+            </div>
+
+            <!-- Grid de los 7 Servicios Reales -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+                
+                <!-- Servicio 1 -->
+                <div class="service-card bg-white p-7 rounded-2xl border border-stone-200/90 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-stone-100 text-stone-900 flex items-center justify-center mb-5 font-mono text-sm font-bold border border-stone-200">
+                            01
+                        </div>
+                        <h3 class="font-serif text-2xl font-semibold text-stone-900 mb-2">Diseño Arquitectónico y Proyecto Ejecutivo</h3>
+                        <p class="text-xs text-stone-600 leading-relaxed font-light mb-4">
+                            Desarrollo de planos arquitectónicos, estructurales, hidrosanitarios y eléctricos detallados para garantizar una construcción eficiente y sin improvisaciones.
+                        </p>
+                        <ul class="text-[11px] text-stone-500 space-y-1.5 mb-6 border-t border-stone-100 pt-3">
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-bronze-500"></i> Plantas, cortes y fachadas normativas</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-bronze-500"></i> Memorias de cálculo e ingenierías</li>
+                        </ul>
+                    </div>
+                    <button onclick="selectServiceForWA('Diseño Arquitectónico y Proyecto Ejecutivo')" class="w-full py-2.5 px-4 bg-stone-100 hover:bg-bronze-600 hover:text-white text-stone-800 rounded-xl text-xs font-semibold uppercase tracking-wider transition-colors flex items-center justify-center gap-2">
+                        <span>Cotizar Servicio 01</span>
+                        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                    </button>
+                </div>
+
+                <!-- Servicio 2 -->
+                <div class="service-card bg-white p-7 rounded-2xl border border-stone-200/90 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-stone-100 text-stone-900 flex items-center justify-center mb-5 font-mono text-sm font-bold border border-stone-200">
+                            02
+                        </div>
+                        <h3 class="font-serif text-2xl font-semibold text-stone-900 mb-2">Construcción y Obra Civil</h3>
+                        <p class="text-xs text-stone-600 leading-relaxed font-light mb-4">
+                            Ejecución material de obras residenciales, comerciales e industriales con mano de obra calificada, control de insumos y estricto apego a presupuestos.
+                        </p>
+                        <ul class="text-[11px] text-stone-500 space-y-1.5 mb-6 border-t border-stone-100 pt-3">
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-bronze-500"></i> Obra negra, gris y acabados finales</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-bronze-500"></i> Programación periódica de estimaciones</li>
+                        </ul>
+                    </div>
+                    <button onclick="selectServiceForWA('Construcción y Obra Civil')" class="w-full py-2.5 px-4 bg-stone-100 hover:bg-bronze-600 hover:text-white text-stone-800 rounded-xl text-xs font-semibold uppercase tracking-wider transition-colors flex items-center justify-center gap-2">
+                        <span>Cotizar Servicio 02</span>
+                        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                    </button>
+                </div>
+
+                <!-- Servicio 3 -->
+                <div class="service-card bg-white p-7 rounded-2xl border border-stone-200/90 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-stone-100 text-stone-900 flex items-center justify-center mb-5 font-mono text-sm font-bold border border-stone-200">
+                            03
+                        </div>
+                        <h3 class="font-serif text-2xl font-semibold text-stone-900 mb-2">Remodelaciones y Ampliaciones</h3>
+                        <p class="text-xs text-stone-600 leading-relaxed font-light mb-4">
+                            Transformación y optimización de inmuebles existentes, reforzamiento de estructuras y redistribución inteligente para ganar m² útiles.
+                        </p>
+                        <ul class="text-[11px] text-stone-500 space-y-1.5 mb-6 border-t border-stone-100 pt-3">
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-bronze-500"></i> Diagnóstico estructural previo</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-bronze-500"></i> Modernización estética e instalaciones</li>
+                        </ul>
+                    </div>
+                    <button onclick="selectServiceForWA('Remodelaciones y Ampliaciones')" class="w-full py-2.5 px-4 bg-stone-100 hover:bg-bronze-600 hover:text-white text-stone-800 rounded-xl text-xs font-semibold uppercase tracking-wider transition-colors flex items-center justify-center gap-2">
+                        <span>Cotizar Servicio 03</span>
+                        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                    </button>
+                </div>
+
+                <!-- Servicio 4 -->
+                <div class="service-card bg-white p-7 rounded-2xl border border-stone-200/90 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-stone-100 text-stone-900 flex items-center justify-center mb-5 font-mono text-sm font-bold border border-stone-200">
+                            04
+                        </div>
+                        <h3 class="font-serif text-2xl font-semibold text-stone-900 mb-2">Diseño de Interiores</h3>
+                        <p class="text-xs text-stone-600 leading-relaxed font-light mb-4">
+                            Concepción de atmósferas con armonía de acabados, selección de iluminación arquitectónica, paletas térmicas de color y mobiliario fijo.
+                        </p>
+                        <ul class="text-[11px] text-stone-500 space-y-1.5 mb-6 border-t border-stone-100 pt-3">
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-bronze-500"></i> Curaduría de materiales y texturas</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-bronze-500"></i> Planos de iluminación y carpintería</li>
+                        </ul>
+                    </div>
+                    <button onclick="selectServiceForWA('Diseño de Interiores')" class="w-full py-2.5 px-4 bg-stone-100 hover:bg-bronze-600 hover:text-white text-stone-800 rounded-xl text-xs font-semibold uppercase tracking-wider transition-colors flex items-center justify-center gap-2">
+                        <span>Cotizar Servicio 04</span>
+                        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                    </button>
+                </div>
+
+                <!-- Servicio 5 -->
+                <div class="service-card bg-white p-7 rounded-2xl border border-stone-200/90 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-stone-100 text-stone-900 flex items-center justify-center mb-5 font-mono text-sm font-bold border border-stone-200">
+                            05
+                        </div>
+                        <h3 class="font-serif text-2xl font-semibold text-stone-900 mb-2">Renderizado 3D & Recorridos</h3>
+                        <p class="text-xs text-stone-600 leading-relaxed font-light mb-4">
+                            Visualización fotorrealista previa a la construcción para validar texturas, iluminación natural, volumetría exterior y espacios interiores.
+                        </p>
+                        <ul class="text-[11px] text-stone-500 space-y-1.5 mb-6 border-t border-stone-100 pt-3">
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-bronze-500"></i> Perspectivas 3D fotorrealistas</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-bronze-500"></i> Renders para presentación comercial</li>
+                        </ul>
+                    </div>
+                    <button onclick="selectServiceForWA('Renderizado 3D')" class="w-full py-2.5 px-4 bg-stone-100 hover:bg-bronze-600 hover:text-white text-stone-800 rounded-xl text-xs font-semibold uppercase tracking-wider transition-colors flex items-center justify-center gap-2">
+                        <span>Cotizar Servicio 05</span>
+                        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                    </button>
+                </div>
+
+                <!-- Servicio 6 -->
+                <div class="service-card bg-white p-7 rounded-2xl border border-stone-200/90 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-stone-100 text-stone-900 flex items-center justify-center mb-5 font-mono text-sm font-bold border border-stone-200">
+                            06
+                        </div>
+                        <h3 class="font-serif text-2xl font-semibold text-stone-900 mb-2">Supervisión de Obra</h3>
+                        <p class="text-xs text-stone-600 leading-relaxed font-light mb-4">
+                            Control técnico en sitio para verificar calidad de concretos, armados de varilla, pruebas hidrosanitarias y apego al proyecto ejecutivo.
+                        </p>
+                        <ul class="text-[11px] text-stone-500 space-y-1.5 mb-6 border-t border-stone-100 pt-3">
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-bronze-500"></i> Bitácora de obra y reportes periódicos</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-bronze-500"></i> Prevención de vicios ocultos</li>
+                        </ul>
+                    </div>
+                    <button onclick="selectServiceForWA('Supervisión de Obra')" class="w-full py-2.5 px-4 bg-stone-100 hover:bg-bronze-600 hover:text-white text-stone-800 rounded-xl text-xs font-semibold uppercase tracking-wider transition-colors flex items-center justify-center gap-2">
+                        <span>Cotizar Servicio 06</span>
+                        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                    </button>
+                </div>
+
+                <!-- Servicio 7 Destacado: Firma DRO Nivel A -->
+                <div class="service-card bg-stone-900 text-stone-50 p-7 rounded-2xl border border-bronze-500/50 shadow-xl flex flex-col justify-between md:col-span-2 lg:col-span-3">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                        <div class="lg:col-span-8 space-y-3">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-bronze-500/20 text-bronze-300 text-[10px] font-mono tracking-widest uppercase">
+                                <i data-lucide="shield-check" class="w-3.5 h-3.5 text-bronze-400"></i>
+                                SERVICIO 07 ESPECIALIZADO
+                            </div>
+                            <h3 class="font-serif text-3xl font-medium text-white">Gestoría de Permisos & Firma DRO Nivel "A"</h3>
+                            <p class="text-xs text-stone-300 leading-relaxed font-light">
+                                Tramitología oficial ante Secretarías de Desarrollo Urbano, licencias de construcción, alineamiento y número oficial, dictámenes de seguridad estructural, terminación de obra y peritajes urbanos en <strong>Puebla, Cholula, Cuautlancingo, Coronango y Tlaxcala</strong>. Sin límite de m² de construcción.
+                            </p>
+                        </div>
+                        <div class="lg:col-span-4 flex flex-col justify-center gap-3">
+                            <button onclick="selectServiceForWA('Gestoría de Permisos y Firma DRO Nivel A')" class="w-full py-3.5 px-6 bg-bronze-600 hover:bg-bronze-500 text-white rounded-xl text-xs font-semibold uppercase tracking-wider transition-colors flex items-center justify-center gap-2 shadow-lg">
+                                <i data-lucide="file-signature" class="w-4 h-4"></i>
+                                <span>Solicitar Firma / Gestoría DRO</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 4. SECCIÓN TIPOLOGÍAS EJECUTADAS & ARCHIVO CONFIDENCIAL (PROTECCIÓN NDA) -->
+    <section id="archivo-privado" class="py-20 md:py-28 bg-stone-900 text-stone-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="max-w-3xl mb-12">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-stone-800 border border-stone-700 text-bronze-400 text-xs font-mono uppercase tracking-wider mb-3">
+                    <i data-lucide="lock" class="w-3.5 h-3.5"></i>
+                    Política de Confidencialidad & Protección NDA
+                </div>
+                <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-white">
+                    Tipologías Ejecutadas & Archivo Técnico
+                </h2>
+                <p class="text-stone-400 text-xs sm:text-sm mt-3 font-light leading-relaxed">
+                    Por estrictos acuerdos de privacidad y confidencialidad firmados con nuestros clientes propietarios, no publicamos direcciones exactas ni fotografías de residencias particulares. Presentamos a continuación la clasificación de tipologías desarrolladas por el despacho.
+                </p>
+            </div>
+
+            <!-- Filtros de Tipología -->
+            <div class="flex flex-wrap gap-2 mb-10" id="nda-filters">
+                <button onclick="filterNDA('Todos')" class="nda-filter-btn active px-4 py-2 rounded-lg text-xs font-mono uppercase tracking-wider bg-bronze-600 text-white" data-cat="Todos">Todas las Tipologías</button>
+                <button onclick="filterNDA('Residencial')" class="nda-filter-btn px-4 py-2 rounded-lg text-xs font-mono uppercase tracking-wider bg-stone-800 text-stone-300 hover:bg-stone-700" data-cat="Residencial">Residencial</button>
+                <button onclick="filterNDA('Comercial')" class="nda-filter-btn px-4 py-2 rounded-lg text-xs font-mono uppercase tracking-wider bg-stone-800 text-stone-300 hover:bg-stone-700" data-cat="Comercial">Comercial</button>
+                <button onclick="filterNDA('Interiorismo')" class="nda-filter-btn px-4 py-2 rounded-lg text-xs font-mono uppercase tracking-wider bg-stone-800 text-stone-300 hover:bg-stone-700" data-cat="Interiorismo">Interiorismo</button>
+                <button onclick="filterNDA('Gestoria')" class="nda-filter-btn px-4 py-2 rounded-lg text-xs font-mono uppercase tracking-wider bg-stone-800 text-stone-300 hover:bg-stone-700" data-cat="Gestoria">Gestoría DRO</button>
+            </div>
+
+            <!-- Cards de Casos Anonimizados/Tipologías -->
+            <div id="nda-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Se inyecta dinámicamente vía JS -->
+            </div>
+
+            <!-- Caja Destacada para Solicitar Dossier Privado por WhatsApp -->
+            <div class="mt-14 p-8 rounded-2xl bg-gradient-to-r from-stone-800 to-stone-850 border border-stone-700 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
+                <div class="space-y-2 text-center md:text-left">
+                    <h3 class="font-serif text-2xl text-white font-medium">¿Requieres consultar referencias de obra terminada?</h3>
+                    <p class="text-xs text-stone-400 max-w-2xl">
+                        Previo registro y validación de prospecto, podemos compartir un dossier digital anonimizado con láminas arquitectónicas y soluciones estructurales ejecutadas.
+                    </p>
+                </div>
+                <button onclick="requestPrivateDossier()" class="px-6 py-3.5 bg-bronze-600 hover:bg-bronze-500 text-white font-semibold text-xs uppercase tracking-wider rounded-xl transition-colors shrink-0 flex items-center gap-2">
+                    <i data-lucide="file-key-2" class="w-4 h-4"></i>
+                    <span>Solicitar Dossier Privado por WhatsApp</span>
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 5. CONFIGURADOR INTERACTIVO DE PROYECTO & CAPTACIÓN WHATSAPP -->
+    <section id="contacto" class="py-20 md:py-28 bg-stone-100/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                
+                <!-- Info Izquierda -->
+                <div class="lg:col-span-5 space-y-8">
+                    <div>
+                        <span class="text-xs font-semibold uppercase tracking-[0.25em] text-bronze-600 block mb-2">03 / Iniciar Proyecto</span>
+                        <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl text-stone-900 font-normal leading-tight">
+                            Consulta Directa con la Arq. Ma. del Rayo Munguía
+                        </h2>
+                        <p class="text-stone-600 text-xs sm:text-sm mt-3 leading-relaxed font-light">
+                            Utiliza nuestro configurador para armar la ficha inicial de tu inmueble o necesidad técnica. La información llegará directamente al WhatsApp personal de la Directora del despacho.
+                        </p>
+                    </div>
+
+                    <!-- Botones Rápidos 1-Clic -->
+                    <div class="bg-white p-5 rounded-2xl border border-stone-200 shadow-sm space-y-3">
+                        <p class="text-[11px] font-semibold uppercase tracking-wider text-stone-500 flex items-center gap-1.5">
+                            <i data-lucide="zap" class="w-3.5 h-3.5 text-bronze-600"></i>
+                            Atajos de Consulta Rápida (1 Clic)
+                        </p>
+
+                        <button onclick="sendQuickWA('Hola Arq. Ma. del Rayo, me interesa solicitar una cotización para un Proyecto Arquitectónico en Puebla/Cholula.')" class="w-full text-left p-3 rounded-xl bg-stone-50 hover:bg-emerald-50 border border-stone-200 hover:border-emerald-500 transition-all flex items-center justify-between group">
+                            <span class="text-xs font-medium text-stone-800 group-hover:text-emerald-900">🏡 Cotizar Proyecto de Casa / Edificio</span>
+                            <i data-lucide="chevron-right" class="w-4 h-4 text-stone-400 group-hover:text-emerald-600"></i>
+                        </button>
+
+                        <button onclick="sendQuickWA('Hola Arq. Ma. del Rayo, requiero informes y costos para Firma de DRO Nivel A y Licencia de Construcción.')" class="w-full text-left p-3 rounded-xl bg-stone-50 hover:bg-emerald-50 border border-stone-200 hover:border-emerald-500 transition-all flex items-center justify-between group">
+                            <span class="text-xs font-medium text-stone-800 group-hover:text-emerald-900">📑 Firma DRO Nivel A & Tramitología Municipal</span>
+                            <i data-lucide="chevron-right" class="w-4 h-4 text-stone-400 group-hover:text-emerald-600"></i>
+                        </button>
+
+                        <button onclick="sendQuickWA('Hola Arq. Ma. del Rayo, busco asesoría para la Remodelación / Supervisión de mi inmueble.')" class="w-full text-left p-3 rounded-xl bg-stone-50 hover:bg-emerald-50 border border-stone-200 hover:border-emerald-500 transition-all flex items-center justify-between group">
+                            <span class="text-xs font-medium text-stone-800 group-hover:text-emerald-900">🛠️ Remodelación o Supervisión Técnica</span>
+                            <i data-lucide="chevron-right" class="w-4 h-4 text-stone-400 group-hover:text-emerald-600"></i>
+                        </button>
+                    </div>
+
+                    <!-- Datos Oficiales de Contacto de la Arqui -->
+                    <div class="bg-stone-900 text-stone-50 p-6 rounded-2xl space-y-4 border border-stone-800">
+                        <h4 class="font-serif text-xl font-medium text-stone-100">Datos Oficiales ARQUITEK</h4>
+                        
+                        <div class="space-y-3 text-xs">
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="map-pin" class="w-4 h-4 text-bronze-400 shrink-0 mt-0.5"></i>
+                                <span><strong>Dirección de Oficina:</strong> Calle Jorge Luis Borges, Mz. 33 Bis, Lt. 13, Col. Balcones del Sur, Puebla, Pue.</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="mail" class="w-4 h-4 text-bronze-400 shrink-0 mt-0.5"></i>
+                                <span><strong>Correo Electrónico:</strong> <a href="mailto:consultoria.arquitectura7@gmail.com" class="underline hover:text-bronze-300">consultoria.arquitectura7@gmail.com</a></span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="phone-call" class="w-4 h-4 text-bronze-400 shrink-0 mt-0.5"></i>
+                                <span><strong>WhatsApp Oficial Directo:</strong> <a href="https://wa.me/522212630195" target="_blank" class="underline hover:text-bronze-300 font-mono">+52 221 263 0195</a></span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Formulador de Ficha de Proyecto en Tiempo Real -->
+                <div class="lg:col-span-7">
+                    <div class="bg-white p-6 sm:p-9 rounded-2xl border border-stone-200 shadow-xl space-y-5">
+                        <div class="flex items-center justify-between pb-4 border-b border-stone-100">
+                            <div>
+                                <h3 class="font-serif text-2xl font-semibold text-stone-900">Configurador de Proyecto</h3>
+                                <p class="text-xs text-stone-500 mt-0.5">Genera un resumen técnico estructurado para enviar por WhatsApp</p>
+                            </div>
+                            <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold">
+                                WA
+                            </div>
+                        </div>
+
+                        <form id="wa-configurator-form" onsubmit="submitWAConfigurator(event)" class="space-y-4">
+                            
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-[11px] font-semibold uppercase tracking-wider text-stone-700 mb-1.5">Tu Nombre Completo *</label>
+                                    <input type="text" id="cfg-name" required placeholder="Ej. Ing. Roberto Gómez" oninput="updateWAPreview()" class="w-full px-3.5 py-2.5 bg-stone-50 border border-stone-300 rounded-xl text-xs focus:outline-none focus:border-bronze-500">
+                                </div>
+                                <div>
+                                    <label class="block text-[11px] font-semibold uppercase tracking-wider text-stone-700 mb-1.5">Municipio o Zona de la Obra *</label>
+                                    <select id="cfg-location" onchange="updateWAPreview()" class="w-full px-3.5 py-2.5 bg-stone-50 border border-stone-300 rounded-xl text-xs focus:outline-none focus:border-bronze-500">
+                                        <option value="Municipio de Puebla">Municipio de Puebla</option>
+                                        <option value="San Pedro Cholula">San Pedro Cholula</option>
+                                        <option value="San Andrés Cholula">San Andrés Cholula</option>
+                                        <option value="Cuautlancingo">Cuautlancingo</option>
+                                        <option value="Coronango">Coronango</option>
+                                        <option value="Estado de Tlaxcala">Estado de Tlaxcala</option>
+                                        <option value="Estado de México / CDMX">Estado de México / CDMX</option>
+                                        <option value="Otra ubicación">Otra ubicación</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-[11px] font-semibold uppercase tracking-wider text-stone-700 mb-1.5">Servicio Requerido *</label>
+                                    <select id="cfg-service" onchange="updateWAPreview()" class="w-full px-3.5 py-2.5 bg-stone-50 border border-stone-300 rounded-xl text-xs focus:outline-none focus:border-bronze-500">
+                                        <option value="01. Diseño Arquitectónico y Proyecto Ejecutivo">01. Diseño Arquitectónico & Proy. Ejecutivo</option>
+                                        <option value="02. Construcción y Obra Civil">02. Construcción y Obra Civil</option>
+                                        <option value="03. Remodelaciones y Ampliaciones">03. Remodelaciones y Ampliaciones</option>
+                                        <option value="04. Diseño de Interiores">04. Diseño de Interiores</option>
+                                        <option value="05. Renderizado 3D y Recorridos">05. Renderizado 3D</option>
+                                        <option value="06. Supervisión de Obra">06. Supervisión de Obra</option>
+                                        <option value="07. Gestoría de Permisos y Firma DRO Nivel A">07. Gestoría y Firma DRO Nivel "A"</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-[11px] font-semibold uppercase tracking-wider text-stone-700 mb-1.5">Estatus del Inmueble / Terreno</label>
+                                    <select id="cfg-status" onchange="updateWAPreview()" class="w-full px-3.5 py-2.5 bg-stone-50 border border-stone-300 rounded-xl text-xs focus:outline-none focus:border-bronze-500">
+                                        <option value="Cuento con terreno listo para diseñar/construir">Cuento con terreno listo</option>
+                                        <option value="Tengo obra en proceso que requiere DRO">Obra en proceso que requiere DRO</option>
+                                        <option value="Inmueble construido a remodelar/ampliar">Inmueble a remodelar / ampliar</option>
+                                        <option value="Fase de planeación / presupuesto inicial">En fase de planeación / presupuesto</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-[11px] font-semibold uppercase tracking-wider text-stone-700 mb-1.5">Descripción breve del proyecto</label>
+                                <textarea id="cfg-notes" rows="3" oninput="updateWAPreview()" placeholder="Ej. Casa habitación de 2 niveles, aprox 220 m², en fraccionamiento cerrado..." class="w-full px-3.5 py-2.5 bg-stone-50 border border-stone-300 rounded-xl text-xs focus:outline-none focus:border-bronze-500"></textarea>
+                            </div>
+
+                            <!-- Vista Previa de Mensaje de WhatsApp -->
+                            <div class="p-3.5 rounded-xl bg-emerald-950/5 border border-emerald-600/20 text-xs">
+                                <div class="flex justify-between items-center mb-1 text-[10px] font-semibold text-emerald-800 uppercase tracking-wider">
+                                    <span>Vista previa del texto que se abrirá en WhatsApp:</span>
+                                </div>
+                                <p id="wa-preview-box" class="font-mono text-[11px] text-stone-700 whitespace-pre-line leading-relaxed"></p>
+                            </div>
+
+                            <button type="submit" class="w-full py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl text-xs uppercase tracking-wider transition-colors flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/20">
+                                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                    <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.124.556 4.119 1.528 5.849l-1.528 5.581 5.715-1.499c1.678.902 3.593 1.419 5.631 1.419 6.627 0 12-5.373 12-12s-5.373-12-12-12z"/>
+                                </svg>
+                                <span>Enviar Consulta a WhatsApp (+52 221 263 0195)</span>
+                            </button>
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER INSTITUCIONAL -->
+    <footer class="bg-stone-900 text-stone-400 py-12 border-t border-stone-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-8 border-b border-stone-800">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-bronze-600 text-white flex items-center justify-center rounded-lg font-serif text-lg font-bold">
+                        A
+                    </div>
+                    <div>
+                        <span class="font-serif text-xl tracking-[0.18em] text-stone-100 font-semibold block leading-none">ARQUITEK</span>
+                        <span class="text-[10px] uppercase tracking-widest text-stone-400">Arq. Ma. del Rayo Munguía Pérez • DRO Nivel "A"</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap gap-5 text-xs uppercase tracking-wider text-stone-400">
+                    <a href="#inicio" class="hover:text-stone-100 transition-colors">Inicio</a>
+                    <a href="#semblanza" class="hover:text-stone-100 transition-colors">Semblanza & DRO</a>
+                    <a href="#servicios" class="hover:text-stone-100 transition-colors">Servicios</a>
+                    <a href="#archivo-privado" class="hover:text-stone-100 transition-colors">Privacidad NDA</a>
+                    <a href="#contacto" class="hover:text-stone-100 transition-colors">Contacto WhatsApp</a>
+                </div>
+            </div>
+
+            <div class="pt-6 flex flex-col sm:flex-row justify-between items-center text-[11px] text-stone-400 gap-3">
+                <p>© 2026 ARQUITEK. Todos los derechos reservados. Puebla, México.</p>
+                <p class="text-stone-400">Resguardo de derechos de confidencialidad conforme a convenios de no divulgación (NDA).</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- BOTÓN FLOTANTE DE WHATSAPP -->
+    <div class="fixed bottom-6 right-6 z-40">
+        <a href="https://wa.me/522212630195?text=Hola%20Arq.%20Ma.%20del%20Rayo,%20quisiera%20solicitar%20informes%20sobre%20sus%20servicios%20de%20ARQUITEK." target="_blank" class="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-3.5 rounded-full shadow-2xl transition-all font-semibold text-xs uppercase tracking-wider" aria-label="Contactar por WhatsApp">
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.124.556 4.119 1.528 5.849l-1.528 5.581 5.715-1.499c1.678.902 3.593 1.419 5.631 1.419 6.627 0 12-5.373 12-12s-5.373-12-12-12z"/>
+            </svg>
+            <span class="hidden sm:inline">Atención Directa WhatsApp</span>
+        </a>
+    </div>
+
+    <!-- TOAST NOTIFICACIÓN -->
+    <div id="toast" class="fixed top-24 right-6 z-50 hidden bg-stone-900 text-stone-50 px-5 py-3 rounded-xl shadow-xl text-xs flex items-center gap-2 border border-stone-700">
+        <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i>
+        <span id="toast-msg">Mensaje generado</span>
+    </div>
+
+    <!-- SCRIPT DE INTERACCIÓN -->
+    <script>
+        const WA_PHONE = "522212630195";
+
+        // Casos Anonimizados / Tipologías Ejecutadas
+        const ndaCases = [
+            {
+                id: "TYP-01",
+                category: "Residencial",
+                title: "Residencia Contemporánea Unifamiliar",
+                m2: "380 m²",
+                location: "Zona Lomas de Angelópolis, San Andrés Cholula",
+                scope: "Diseño Arquitectónico, Proyecto Ejecutivo y Construcción Integral",
+                features: "Doble altura en estancia, iluminación bioclimática, cisterna pluvial 10k L."
+            },
+            {
+                id: "TYP-02",
+                category: "Gestoria",
+                title: "Dictamen de Seguridad & Licencia DRO A",
+                m2: "1,450 m²",
+                location: "Municipio de Puebla",
+                scope: "Peritaje Estructural, Alineamiento y Firma de Directora Responsable Nivel A",
+                features: "Dictamen normativo ante Secretaría de Desarrollo Urbano para complejo."
+            },
+            {
+                id: "TYP-03",
+                category: "Comercial",
+                title: "Plaza Boutique & Locales Comerciales",
+                m2: "620 m²",
+                location: "San Pedro Cholula",
+                scope: "Proyecto Ejecutivo, Renderizado 3D y Supervisión de Obra Civil",
+                features: "Estructura metálica vista, estacionamiento permeado y accesibilidad universal."
+            },
+            {
+                id: "TYP-04",
+                category: "Interiorismo",
+                title: "Remodelación e Interiorismo en Penthouse",
+                m2: "210 m²",
+                location: "Zona Recta a Cholula / Puebla",
+                scope: "Redistribución de Espacios, Carpintería de Autor y Proyecto Lumínico",
+                features: "Plafones con luz indirecta circadiana, acabados en recubrimientos pétreos."
+            },
+            {
+                id: "TYP-05",
+                category: "Residencial",
+                title: "Conjunto Habitacional Horizontal (3 Casas)",
+                m2: "590 m² totales",
+                location: "Cuautlancingo, Puebla",
+                scope: "Diseño Urbano, Régimen de Condominio y Gestión de Permisos DRO A",
+                features: "Aprovechamiento máximo de lote con pasillo común vegetado."
+            },
+            {
+                id: "TYP-06",
+                category: "Gestoria",
+                title: "Terminación de Obra & Regularización",
+                m2: "890 m²",
+                location: "Coronango, Puebla",
+                scope: "Supervisión Pericial y Constancia de Ocupación",
+                features: "Validación de planos As-Built y dictamen de seguridad para firma DRO."
+            }
+        ];
+
+        function renderNDACases(filter = "Todos") {
+            const container = document.getElementById("nda-grid");
+            const list = filter === "Todos" ? ndaCases : ndaCases.filter(c => c.category === filter);
+
+            container.innerHTML = list.map(c => `
+                <div class="bg-stone-800 rounded-2xl p-6 border border-stone-700/80 flex flex-col justify-between space-y-4 hover:border-bronze-500/60 transition-colors">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between text-[11px] font-mono">
+                            <span class="px-2.5 py-0.5 rounded bg-bronze-500/20 text-bronze-300 font-semibold uppercase">${c.category}</span>
+                            <span class="text-stone-500">${c.id} • NDA</span>
+                        </div>
+                        <h4 class="font-serif text-xl font-medium text-white">${c.title}</h4>
+                        <div class="space-y-1 text-xs text-stone-300">
+                            <p><strong>Ubicación general:</strong> ${c.location}</p>
+                            <p><strong>Escala:</strong> ${c.m2}</p>
+                            <p class="text-stone-400 font-light mt-2">${c.scope}</p>
+                        </div>
+                    </div>
+                    <div class="pt-3 border-t border-stone-700/60 flex items-center justify-between text-xs">
+                        <span class="text-[11px] text-stone-400">Protección de Datos Activa</span>
+                        <button onclick="requestNDASpecific('${c.title}')" class="text-bronze-400 hover:text-bronze-300 font-semibold flex items-center gap-1">
+                            Consultar Ficha →
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+
+            lucide.createIcons();
+        }
+
+        function filterNDA(cat) {
+            document.querySelectorAll('.nda-filter-btn').forEach(b => {
+                if (b.dataset.cat === cat) {
+                    b.className = "nda-filter-btn active px-4 py-2 rounded-lg text-xs font-mono uppercase tracking-wider bg-bronze-600 text-white";
+                } else {
+                    b.className = "nda-filter-btn px-4 py-2 rounded-lg text-xs font-mono uppercase tracking-wider bg-stone-800 text-stone-300 hover:bg-stone-700";
+                }
+            });
+            renderNDACases(cat);
+        }
+
+        function buildWAMessage() {
+            const name = document.getElementById('cfg-name').value.trim() || "[Tu Nombre]";
+            const location = document.getElementById('cfg-location').value;
+            const service = document.getElementById('cfg-service').value;
+            const status = document.getElementById('cfg-status').value;
+            const notes = document.getElementById('cfg-notes').value.trim();
+
+            let txt = `Hola Arq. Ma. del Rayo Munguía Pérez, me contacto desde el sitio web de ARQUITEK.\n\n`;
+            txt += `*SOLICITUD DE INFORMACIÓN / COTIZACIÓN:*\n`;
+            txt += `• *Cliente:* ${name}\n`;
+            txt += `• *Ubicación/Municipio:* ${location}\n`;
+            txt += `• *Servicio Requerido:* ${service}\n`;
+            txt += `• *Estatus del Inmueble:* ${status}`;
+            if (notes) {
+                txt += `\n• *Notas:* ${notes}`;
+            }
+            txt += `\n\nQuedo atento a su respuesta para acordar una breve llamada o cita de revisión.`;
+            return txt;
+        }
+
+        function updateWAPreview() {
+            document.getElementById('wa-preview-box').textContent = buildWAMessage();
+        }
+
+        function submitWAConfigurator(e) {
+            e.preventDefault();
+            const msg = buildWAMessage();
+            const url = `https://wa.me/${WA_PHONE}?text=${encodeURIComponent(msg)}`;
+            showToast("Redirigiendo a WhatsApp...");
+            window.open(url, '_blank');
+        }
+
+        function selectServiceForWA(serviceName) {
+            document.getElementById('cfg-service').value = serviceName;
+            document.getElementById('contacto').scrollIntoView({ behavior: 'smooth' });
+            updateWAPreview();
+            showToast(`Servicio "${serviceName}" seleccionado en el configurador`);
+        }
+
+        function sendQuickWA(text) {
+            const url = `https://wa.me/${WA_PHONE}?text=${encodeURIComponent(text)}`;
+            showToast("Abriendo WhatsApp...");
+            window.open(url, '_blank');
+        }
+
+        function requestPrivateDossier() {
+            const msg = `Hola Arq. Ma. del Rayo, me interesa solicitar el Dossier Digital de Referencias Técnicas de ARQUITEK bajo acuerdo de confidencialidad.`;
+            sendQuickWA(msg);
+        }
+
+        function requestNDASpecific(tipologyTitle) {
+            const msg = `Hola Arq. Ma. del Rayo, quisiera consultar información técnica anonimizada similar a la tipología: "${tipologyTitle}".`;
+            sendQuickWA(msg);
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').textContent = msg;
+            toast.classList.remove('hidden');
+            setTimeout(() => toast.classList.add('hidden'), 3000);
+        }
+
+        // Navegación móvil
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+        document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', () => menu.classList.add('hidden')));
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderNDACases('Todos');
+            updateWAPreview();
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>
